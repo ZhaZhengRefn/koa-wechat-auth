@@ -39,3 +39,4 @@ node_modules
 .idea
 
 example.config.js
+example.index.html

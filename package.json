@@ -2,12 +2,12 @@
   "name": "koa-wechat-auth",
   "version": "2.0.0",
   "description": "wechat auth",
-  "main": "app.js",
+  "main": "./bin/index.js",
   "scripts": {
     "dev": "nodemon --inspect bin/development.js"
   },
   "bin": {
-    "wxauth": "./app.js"
+    "wxauth": "./bin/index.js"
   },
   "author": "zheng_refn",
   "license": "MIT",
