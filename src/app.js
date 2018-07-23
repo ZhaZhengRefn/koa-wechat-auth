@@ -5,7 +5,14 @@ const logger = require('koa-logger')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const views = require('koa-views')
+const config = require('./config')
 const router = require('./routes')
+
+app.use(async (ctx, next) => {
+  //TODO: freeze the config && format the config
+  ctx.AUTH_CONF = config
+  await next()
+})
 
 // middleWares
 app.use(json())
@@ -34,7 +41,7 @@ app.on('error', async (err, ctx) => {
   console.log('error occured:', err)
 })
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8484
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
 })
