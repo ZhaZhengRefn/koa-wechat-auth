@@ -16,7 +16,9 @@ module.exports = async (ctx) => {
   } = ctx.AUTH_CONF
 
   // 1.获取重定向地址与公众号配置
-  const originUrl = ctx.cookies.get('redirect')
+  // TODO: 使用cookies方案还是query方案
+  // const originUrl = ctx.cookies.get('redirect')
+  const originUrl = decodeURIComponent(ctx.query.redirect)
   const wxApp = typeof getWxApp === 'function' ? getWxApp(ctx) : getWxApp
   warning(!checkWxApp(wxApp),
     `wxApp format error
