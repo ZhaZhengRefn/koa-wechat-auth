@@ -38,6 +38,4 @@ node_modules
 # JETBRAIN
 .idea
 
-src/config/*
-!src/config/index.js
-!src/config/default.js.idea
+example.config.js
