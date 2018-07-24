@@ -25,7 +25,7 @@ module.exports = async (ctx) => {
     -----------------------
     it should include appId, appName, appSecret and id.`
   )
-  
+  debugger
   // 2.约定规格为query = { redirect: 'http://www.foobar.com', o: 'openId' }
   const openId = ctx.query.o
 
@@ -35,7 +35,6 @@ module.exports = async (ctx) => {
   // 4.创建token
   const token = await createToken({
     wxApp,
-    wxUser,
     dbUser,
   })
 

@@ -1,4 +1,4 @@
-const indexService = require('../services/index')
+const indexService = require('../services/index/')
 
 module.exports = async (ctx, next) => {
   await indexService(ctx)
