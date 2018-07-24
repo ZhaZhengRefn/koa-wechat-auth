@@ -10,12 +10,7 @@ const router = require('./routes')
 
 app.use(async (ctx, next) => {
   //TODO: freeze the config && format the config
-  ctx.AUTH_CONF = {
-    ...config,
-    indexRoute: process.env.INDEX_ROUTE || '/',
-    authRoute: process.env.AUTH_ROUTE || '/auth/:type',
-    openWeixinDomain: process.env.OPEN_WEIXIN_DOMAIN || 'https://open.weixin.qq.com'
-  }
+  ctx.AUTH_CONF = Object.assign(Object.create(null), config)
   await next()
 })
 
