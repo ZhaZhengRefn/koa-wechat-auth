@@ -1,4 +1,5 @@
 const Koa = require('koa')
+const warning = require('warning')
 const app = new Koa()
 const path = require('path')
 const logger = require('koa-logger')
@@ -7,10 +8,23 @@ const onerror = require('koa-onerror')
 const views = require('koa-views')
 const config = require('./config')
 const router = require('./routes')
+const {
+  freeze,
+} = require('./util/')
 
 app.use(async (ctx, next) => {
-  //TODO: freeze the config && format the config
-  ctx.AUTH_CONF = Object.assign(Object.create(null), config)
+  // init CONF
+  const _config = Object.assign(Object.create(null), config)
+  freeze(_config)
+  Object.defineProperty(ctx, 'AUTH_CONF', {
+    get() {
+      return _config
+    },
+    set() {
+      const msg = 'Can not set ctx.AUTH_CONF !'
+      warning(1, msg)
+    }
+  })
   await next()
 })
 
