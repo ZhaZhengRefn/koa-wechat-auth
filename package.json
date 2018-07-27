@@ -2,12 +2,9 @@
   "name": "koa-wechat-auth",
   "version": "2.0.0",
   "description": "wechat auth",
-  "main": "app.js",
+  "main": "./bin/index.js",
   "scripts": {
-    "dev": "nodemon --inspect bin/"
-  },
-  "bin": {
-    "wxauth": "./app.js"
+    "dev": "nodemon --inspect bin/development.js"
   },
   "author": "zheng_refn",
   "license": "MIT",
@@ -23,7 +20,8 @@
     "koa-onerror": "^4.0.0",
     "koa-router": "^7.4.0",
     "koa-views": "^6.1.4",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "warning": "^4.0.1"
   },
   "devDependencies": {
     "cross-env": "^5.1.4",
