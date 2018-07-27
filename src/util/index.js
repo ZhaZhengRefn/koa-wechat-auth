@@ -5,6 +5,10 @@ const fromFuncOrNot = fn => (...args) => {
   return fn
 }
 
+const hasOwn = (obj, key) => {
+  return Object.prototype.hasOwnProperty.call(obj, key)
+}
+
 const hasKeys = (context, keys) => {
   const _has = Object.prototype.hasOwnProperty
   return keys.every(k => _has.call(context, k))
@@ -37,7 +41,7 @@ const chain = function(fns) {
 const freeze = function(obj) {
   Object.freeze(obj)
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (hasOwn(obj, key)) {
       const cur = obj[key]
       if (typeof cur === 'object' && cur != null) {
         freeze(cur)

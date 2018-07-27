@@ -22,7 +22,7 @@ app.use(async (ctx, next) => {
     },
     set() {
       const msg = 'Can not set ctx.AUTH_CONF !'
-      warning(1, msg)
+      warning(0, msg)
     }
   })
   await next()
