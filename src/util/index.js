@@ -1,7 +1,7 @@
 const fromFuncOrNot = fn => (...args) => {
   if (typeof fn === 'function') {
     return fn.apply(this, args)
-  } 
+  }
   return fn
 }
 
@@ -22,8 +22,8 @@ const genRedirectUri = (domain, path, params) => {
   return domain + path
 }
 
-const after = function(fn, afterFn) {
-  return async function(...args) {
+const after = function (fn, afterFn) {
+  return async function (...args) {
     const result = await fn.apply(this, args)
     if (result === 'next') {
       return await afterFn.apply(this, args)
@@ -32,13 +32,13 @@ const after = function(fn, afterFn) {
   }
 }
 
-const chain = function(fns) {
+const chain = function (fns) {
   return fns.reduce((pre, next) => {
     return after(pre, next)
   })
 }
 
-const freeze = function(obj) {
+const freeze = function (obj) {
   Object.freeze(obj)
   for (const key in obj) {
     if (hasOwn(obj, key)) {
@@ -51,10 +51,23 @@ const freeze = function(obj) {
   return obj
 }
 
+const mergeOptions = function (to, from) {
+  const obj = Object.assign(Object.create(null), to)
+  for (const key in from) {
+    if (hasOwn(obj, key)) {
+      obj[key] = from[key] || obj[key]
+    } else {
+      obj[key] = from[key]
+    }
+  }
+  return obj
+}
+
 module.exports = exports = {
   fromFuncOrNot,
   hasKeys,
   genRedirectUri,
   chain,
-  freeze,  
+  freeze,
+  mergeOptions,
 }

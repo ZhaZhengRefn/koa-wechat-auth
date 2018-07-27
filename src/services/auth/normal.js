@@ -3,6 +3,9 @@ const {
   checkWxApp,
 } = require('../../util/check')
 const {
+  fromFuncOrNot,
+} = require('../../util/')
+const {
   getUserByCode,
 } = require('../../models/wxUser')
 
@@ -16,10 +19,9 @@ module.exports = async (ctx) => {
   } = ctx.AUTH_CONF
 
   // 1.获取重定向地址与公众号配置
-  // TODO: 使用cookies方案还是query方案
-  // const originUrl = ctx.cookies.get('redirect')
-  const originUrl = decodeURIComponent(ctx.query.redirect)
-  const wxApp = typeof getWxApp === 'function' ? getWxApp(ctx) : getWxApp
+  const originUrl = ctx.cookies.get('redirectUrl')
+  // const originUrl = decodeURIComponent(ctx.query.redirect)
+  const wxApp = await fromFuncOrNot(getWxApp)(ctx)
   warning(!checkWxApp(wxApp),
     `wxApp format error
     -----------------------
@@ -46,6 +48,8 @@ module.exports = async (ctx) => {
 
   // 5.注入token
   await injectToken(ctx, token)
+
+  console.log('>>>>>', originUrl);
 
   // 6.重定向至原页面
   await ctx.render('forward', {
