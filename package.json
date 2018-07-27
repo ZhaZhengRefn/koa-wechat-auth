@@ -6,9 +6,6 @@
   "scripts": {
     "dev": "nodemon --inspect bin/development.js"
   },
-  "bin": {
-    "wxauth": "./bin/index.js"
-  },
   "author": "zheng_refn",
   "license": "MIT",
   "dependencies": {
